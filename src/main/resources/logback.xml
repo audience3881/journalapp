@@ -1,0 +1,34 @@
+<configuration>
+  <!--appender
+  will op the logs-->
+  <appender name="appender-1" class="ch.qos.logback.core.ConsoleAppender">
+    <!--we
+    use encoder to determine in
+    which format we want to op the logs-->
+    <encoder>
+      <pattern>
+        %d{yy-MM-dd HH:mm:ss.SSS} [%thread] %-5level %logger{36} - %msg%n
+      </pattern>
+    </encoder>
+  </appender>
+  <appender name="appender-2" class="ch.qos.logback.core.rolling.RollingFileAppender">
+    <!--fileName
+    where appender will op the log-->
+    <file>journalapp.log</file>
+    <rollingPolicy class="ch.qos.logback.core.rolling.SizeAndTimeBasedRollingPolicy">
+      <fileNamePattern>journalapp-%d{yy-MM-dd}.%i.log</fileNamePattern>
+      <maxFileSize>10MB</maxFileSize>
+      <maxHistory>10</maxHistory>
+    </rollingPolicy>
+    <encoder>
+      <pattern>
+        %d{yy-MM-dd HH:mm:ss.SSS} [%thread] %-5level %logger{36} - %msg%n
+      </pattern>
+    </encoder>
+  </appender>
+
+  <root level="INFO">
+    <appender-ref ref="appender-1" />
+    <appender-ref ref="appender-2" />
+  </root>
+</configuration>
